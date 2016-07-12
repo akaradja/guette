@@ -6,7 +6,7 @@
 /*   By: akaradja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/12 09:37:02 by akaradja          #+#    #+#             */
-/*   Updated: 2016/07/12 09:38:38 by akaradja         ###   ########.fr       */
+/*   Updated: 2016/07/12 10:18:06 by akaradja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static char	*ligne(char *line, char *buf)
 	int		j;
 	char	*tmp;
 
+	i = 0;
 	tmp = line;
 	while (buf[i] && buf[i] != '\n')
 		i++;
@@ -63,19 +64,20 @@ int			get_next_line(int const fd, char **line)
 	test = NULL;
 	*line = ft_memalloc(sizeof(char*));
 	buf = ft_strnew(BUFF_SIZE + 1);
-	while (ret = read(fd, buf, BUFF_SIZE) && !test)
+	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
 		if (ret < 0)
 			return (-1);
-		if (test = ft_strchr(buf, '\n'))
-			cut(buf);
-		printf("%s\n", buf);
+		if ((test = ft_strchr(buf, '\n')) != NULL)
+			cut(buf); 
 		buf[ret] = '\0';
 		*line = ligne(*line, buf);
+		if (test != NULL)
+			return (1);
 	}
 	return (0);
 }
-
+/*
 int			main(int ac, char **av)
 {
 	char	**line;
@@ -85,4 +87,4 @@ int			main(int ac, char **av)
 	ft_putstr(*line);
 	ft_putchar('\n');
 	return (0);
-}
+}*/
