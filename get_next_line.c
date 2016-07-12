@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akaradja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/12 09:37:02 by akaradja          #+#    #+#             */
+/*   Updated: 2016/07/12 09:38:38 by akaradja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <fcntl.h>
 #include "libft/libft.h"
 #include "get_next_line.h"
@@ -9,8 +21,8 @@ static char	*ligne(char *line, char *buf)
 {
 	int		i;
 	int		j;
-	char		*tmp;
-	
+	char	*tmp;
+
 	tmp = line;
 	while (buf[i] && buf[i] != '\n')
 		i++;
@@ -32,7 +44,7 @@ static char	*ligne(char *line, char *buf)
 	return (line);
 }
 
-void	cut(char *buf)
+void		cut(char *buf)
 {
 	int	i;
 
@@ -42,10 +54,10 @@ void	cut(char *buf)
 	buf[i] = 0;
 }
 
-int	get_next_line(int const fd, char **line)
+int			get_next_line(int const fd, char **line)
 {
 	char	*buf;
-	int	ret;
+	int		ret;
 	char	*test;
 
 	test = NULL;
@@ -64,13 +76,13 @@ int	get_next_line(int const fd, char **line)
 	return (0);
 }
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	char	**line;
-	
+
 	line = malloc(sizeof(char**));
 	get_next_line(open(av[1], O_RDONLY), line);
-//	ft_putstr(*line);
-//	ft_putchar('\n');
+	ft_putstr(*line);
+	ft_putchar('\n');
 	return (0);
 }
